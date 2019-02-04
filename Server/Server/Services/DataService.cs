@@ -18,26 +18,22 @@ namespace Server.Services
             accounts = new ConcurrentBag<Account>(DataReaderWriter.ReadData());
         }
 
-        public int CreateAccount(string name)
+        public Guid CreateAccount(string name)
         {
-            lock(lockObject)
+            var newAccount = new Account(name, Constants.StartMoney);
+            accounts.Add(newAccount);
+
+            lock (lockObject)
             {
-                var maxId = accounts.Count == 0 ? 0 : accounts.Max(account => account.ID);
-                var newAccount = new Account()
-                {
-                    ID = maxId + 1,
-                    Name = name,
-                    Saldo = Constants.Constants.StartMoney
-                };
-                accounts.Add(newAccount);
                 DataReaderWriter.WriteData(accounts.ToList());
-                return maxId;
             }
+
+            return newAccount.ID;
         }
 
-        public bool DoesAccountExist(int id)
+        public bool DoesAccountExist(Guid guid)
         {
-            return accounts.Any(account => account.ID == id);
+            return accounts.Any(account => account.ID == guid);
         }
     }
 }

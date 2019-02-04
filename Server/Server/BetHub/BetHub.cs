@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using Server.Helper;
 using Server.Services;
+using System;
+using System.Threading.Tasks;
 
 namespace Server.BetHub
 {
@@ -12,16 +15,19 @@ namespace Server.BetHub
             this.dataService = dataService;
         }
 
-        public string TestMe(string message)
+        string CreateAccount(string name)
         {
-            string connId = Context.ConnectionId;
-            dataService.CreateAccount("Maurice Hieronymus");
-            return message;
+            Throw.IfNullOrWhitespace(() => name);
+
+            return dataService.CreateAccount(name).ToString();
         }
 
-        public void ServerCall()
+        bool DoesAccountExist(string guid)
         {
-            Clients.All.SendAsync("ClientCall");
+            Throw.IfNullOrWhitespace(() => guid);
+
+            var parsedGuid = Guid.Parse(guid);
+            return dataService.DoesAccountExist(parsedGuid);
         }
     }
 }
