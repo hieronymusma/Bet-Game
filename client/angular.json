@@ -135,13 +135,17 @@
   "schematics": {
     "@schematics/angular": {
       "component": {
-        "spec": false
+        "spec": false,
+        "lintFix": true,
+        "styleext": "scss"
       },
       "service": {
-        "spec": false
+        "spec": false,
+        "lintFix": true
       },
       "pipe": {
-        "spec": false
+        "spec": false,
+        "lintFix": true
       }
     }
   }
