@@ -136,5 +136,22 @@
       }
     }
   },
-  "defaultProject": "client"
+  "defaultProject": "client",
+  "schematics": {
+    "@schematics/angular": {
+      "component": {
+        "spec": false,
+        "lintFix": true,
+        "styleext": "scss"
+      },
+      "service": {
+        "spec": false,
+        "lintFix": true
+      },
+      "pipe": {
+        "spec": false,
+        "lintFix": true
+      }
+    }
+  }
 }
