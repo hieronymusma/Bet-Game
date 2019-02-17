@@ -8,36 +8,18 @@ using System.Threading.Tasks;
 
 namespace Server.Services
 {
-    public class DataService
+    public class DataService : IDataService
     {
-        private readonly ConcurrentBag<Account> accounts;
-        private readonly object lockObject = new object();
+        private readonly DatabaseContext mContext;
 
-        public DataService()
+        public DataService(DatabaseContext context)
         {
-            accounts = new ConcurrentBag<Account>(DataReaderWriter.ReadData());
+            mContext = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public int CreateAccount(string name)
+        public bool IsUserValid(Guid guid)
         {
-            lock(lockObject)
-            {
-                var maxId = accounts.Count == 0 ? 0 : accounts.Max(account => account.ID);
-                var newAccount = new Account()
-                {
-                    ID = maxId + 1,
-                    Name = name,
-                    Saldo = Constants.Constants.StartMoney
-                };
-                accounts.Add(newAccount);
-                DataReaderWriter.WriteData(accounts.ToList());
-                return maxId;
-            }
-        }
-
-        public bool DoesAccountExist(int id)
-        {
-            return accounts.Any(account => account.ID == id);
+            return mContext.Accounts.Where(account => account.GUID == guid).Count() > 0;
         }
     }
 }

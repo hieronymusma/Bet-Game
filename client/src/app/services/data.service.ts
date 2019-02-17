@@ -13,7 +13,7 @@ export class DataService {
       .withUrl("http://" + window.location.hostname + ":5000/BetHub")
       .configureLogging(LogLevel.Information)
       .build();
-    this._hubConnection.on("ClientCall", this.ClientCall);
+    this.connect();
   }
 
   public async connect(): Promise<void> {

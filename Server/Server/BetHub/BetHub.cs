@@ -1,27 +1,22 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using Server.Services;
+using System;
 
 namespace Server.BetHub
 {
     public class BetHub : Hub
     {
-        private DataService dataService;
+        private readonly IDataService mDataService;
 
-        public BetHub(DataService dataService)
+        public BetHub(IDataService dataService)
         {
-            this.dataService = dataService;
+            mDataService = dataService ?? throw new ArgumentNullException(nameof(dataService));
         }
 
-        public string TestMe(string message)
+        public bool IsUserValid(string guidString)
         {
-            string connId = Context.ConnectionId;
-            dataService.CreateAccount("Maurice Hieronymus");
-            return message;
-        }
-
-        public void ServerCall()
-        {
-            Clients.All.SendAsync("ClientCall");
+            var guid = Guid.Parse(guidString);
+            return mDataService.IsUserValid(guid);
         }
     }
 }
