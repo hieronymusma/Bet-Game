@@ -7,40 +7,30 @@ import { HubConnectionBuilder, LogLevel, HubConnection, HubConnectionState } fro
 export class DataService {
 
   private _hubConnection: HubConnection;
+  private _connectionPromise: Promise<void>;
 
   constructor() {
     this._hubConnection = new HubConnectionBuilder()
       .withUrl("http://" + window.location.hostname + ":5000/BetHub")
       .configureLogging(LogLevel.Information)
       .build();
-    this.connect();
+    this._connectionPromise = this.connect();
   }
 
-  public async connect(): Promise<void> {
-    if (this._hubConnection.state === HubConnectionState.Disconnected) {
+  private connect(): Promise<void> {
+      console.log("Connect to hub");
       return this._hubConnection.start();
-    }
-    return Promise.resolve();
   }
 
   public async IsUserValid(guid: string): Promise<boolean> {
-    return true;
+    console.log("Call IsUserValid with following guid:", guid);
+    await this._connectionPromise;
+    return this._hubConnection.invoke<boolean>("IsUserValid", guid);
   }
 
-
-  public TestMe(): Promise<void> {
-    return this._hubConnection.invoke<string>("TestMe", "42").then(value => {
-      if (value !== "42") {
-        throw new Error("Failure");
-      }
-    });
-  }
-
-  public ServerCall(): Promise<void> {
-    return this._hubConnection.invoke("ServerCall");
-  }
-
-  private ClientCall() {
-    console.log("Client call executed");
+  public async createUserAndReturnGuid(firstName: string, lastName: string) {
+    console.log("Call CreateUserAndReturnGuid with:", firstName, lastName);
+    await this._connectionPromise;
+    return this._hubConnection.invoke<string>("CreateUserAndReturnGuid", firstName, lastName);
   }
 }

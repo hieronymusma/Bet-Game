@@ -1,5 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
+import { NgxSpinnerModule } from "ngx-spinner";
 
 import { RouterModule, Routes } from "@angular/router";
 import { CookieService } from "ngx-cookie-service";
@@ -23,7 +24,8 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    NgxSpinnerModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

@@ -22,7 +22,7 @@ namespace Server
         {
             services.AddDbContext<DatabaseContext>(options =>
             {
-                options.UseSqlServer(@"Server=(localdb)\\mssqllocaldb;Database=PShuttle;Trusted_Connection=True;MultipleActiveResultSets=true");
+                options.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Database=PShuttle;Trusted_Connection=True;MultipleActiveResultSets=true");
             });
 
             services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
@@ -37,6 +37,7 @@ namespace Server
             services.AddSignalR();
 
             services.AddScoped<IDataService, DataService>();
+            services.AddScoped<IGuidService, GuidService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

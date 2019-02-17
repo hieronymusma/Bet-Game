@@ -1,24 +1,19 @@
 import { Injectable } from "@angular/core";
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from "@angular/router";
-import { CookieService } from "ngx-cookie-service";
 import { DataService } from "../services/data.service";
+import { AuthCookieService } from "../services/auth-cookie.service";
 
 @Injectable({
   providedIn: "root"
 })
 export class AuthGuard implements CanActivate {
 
-  private readonly authCookie = "auth-key-pshuttle";
-
-  constructor(private router: Router, private cookieService: CookieService, private dataService: DataService) { }
+  constructor(private router: Router, private authCookieService: AuthCookieService, private dataService: DataService) { }
 
   async canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
-    const cookieAvailable = this.cookieService.check(this.authCookie);
-
-    if (cookieAvailable) {
-      const authKey = this.cookieService.get(this.authCookie);
+    if (this.authCookieService.doesAuthKeyExists()) {
+      const authKey = this.authCookieService.getAuthKey();
       const isValid = await this.dataService.IsUserValid(authKey);
-
       if (isValid) {
         return true;
       }
