@@ -23,6 +23,11 @@ export class DataService {
     return Promise.resolve();
   }
 
+  public async IsUserValid(guid: string): Promise<boolean> {
+    return true;
+  }
+
+
   public TestMe(): Promise<void> {
     return this._hubConnection.invoke<string>("TestMe", "42").then(value => {
       if (value !== "42") {
