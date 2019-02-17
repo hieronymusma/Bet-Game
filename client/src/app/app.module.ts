@@ -1,14 +1,17 @@
 import { BrowserModule } from "@angular/platform-browser";
-import { NgModule } from "@angular/core";
+import { NgModule, ErrorHandler } from "@angular/core";
 import { NgxSpinnerModule } from "ngx-spinner";
 
 import { RouterModule, Routes } from "@angular/router";
 import { CookieService } from "ngx-cookie-service";
 
 import { AppComponent } from "./app.component";
-import { LoginComponent } from "./login/login.component";
-import { BetComponent } from "./bet/bet.component";
+import { LoginComponent } from "./components/login/login.component";
+import { BetComponent } from "./components/bet/bet.component";
 import { AuthGuard } from "./auth/auth.guard";
+import { ErrrorNotificationComponent } from "./errror-notification/errror-notification.component";
+import { AppErrorHandler } from "./error-handler";
+import { LineWrapPipe } from "./pipes/line-wrap.pipe";
 
 const appRoutes: Routes = [
   { path: "", pathMatch: "full", redirectTo: "/bet" },
@@ -20,14 +23,22 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     LoginComponent,
-    BetComponent
+    BetComponent,
+    ErrrorNotificationComponent,
+    LineWrapPipe
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     NgxSpinnerModule
   ],
-  providers: [CookieService],
+  providers: [
+    CookieService,
+    {
+      provide: ErrorHandler,
+      useClass: AppErrorHandler
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

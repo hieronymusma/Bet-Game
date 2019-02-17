@@ -14,12 +14,13 @@ export class DataService {
       .withUrl("http://" + window.location.hostname + ":5000/BetHub")
       .configureLogging(LogLevel.Information)
       .build();
-    this._connectionPromise = this.connect();
+    this._hubConnection.onclose(error => this.onConnectionLost(error));
+    this.connect();
   }
 
-  private connect(): Promise<void> {
+  private connect(): void {
       console.log("Connect to hub");
-      return this._hubConnection.start();
+      this._connectionPromise = this._hubConnection.start();
   }
 
   public async IsUserValid(guid: string): Promise<boolean> {
@@ -32,5 +33,10 @@ export class DataService {
     console.log("Call CreateUserAndReturnGuid with:", firstName, lastName);
     await this._connectionPromise;
     return this._hubConnection.invoke<string>("CreateUserAndReturnGuid", firstName, lastName);
+  }
+
+  private onConnectionLost(error: Error): void {
+    console.log("Connection was disconnected. Error:", error);
+    this.connect();
   }
 }

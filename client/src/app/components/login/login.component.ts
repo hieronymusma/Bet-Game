@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { DataService } from "../services/data.service";
-import { AuthCookieService } from "../services/auth-cookie.service";
+import { DataService } from "../../services/data.service";
+import { AuthCookieService } from "../../services/auth-cookie.service";
 import { Router } from "@angular/router";
 import { NgxSpinnerService } from "ngx-spinner";
 
