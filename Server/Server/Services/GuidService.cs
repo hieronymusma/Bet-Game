@@ -27,7 +27,7 @@ namespace Server.Services
                     newGuid = Guid.NewGuid();
                 }
 
-                var newUser = new Account()
+                var newUser = new User()
                 {
                     FirstName = firstName,
                     LastName = lastName,

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR;
+using Server.DataStorage;
 using Server.Services;
 using System;
 
@@ -27,6 +28,14 @@ namespace Server.BetHub
             if (string.IsNullOrWhiteSpace(lastname)) throw new ArgumentNullException(nameof(lastname));
 
             return mDataService.CreateUserAndReturnGuid(firstname, lastname);
+        }
+
+        public User GetAccountInformation(string guidString)
+        {
+            if (string.IsNullOrWhiteSpace(guidString)) throw new ArgumentNullException(nameof(guidString));
+
+            var guid = Guid.Parse(guidString);
+            return mDataService.GetAccountInformation(guid);
         }
     }
 }

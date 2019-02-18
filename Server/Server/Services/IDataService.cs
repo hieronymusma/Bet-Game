@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Server.DataStorage;
+using System;
 
 namespace Server.Services
 {
@@ -7,5 +8,7 @@ namespace Server.Services
         bool IsUserValid(Guid guid);
 
         string CreateUserAndReturnGuid(string fristName, string lastName);
+
+        User GetAccountInformation(Guid guid);
     }
 }

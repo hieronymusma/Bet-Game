@@ -1,3 +1,22 @@
-<p>
-  bet works!
-</p>
+<div class="alert alert-primary" style="margin-top: 15px;">
+  <div class="col-xs-12 text-center">
+    <h4>{{Firstname}} {{Lastname}}</h4>
+  </div>
+  <div class="col-xs-12 text-center">
+    <h4 style="color: black;">Cash: {{Saldo}}$</h4>
+  </div>
+</div>
+<div class="form-group">
+  <div class="text-center">
+      <label>Wie viel willst du setzen?</label>
+  </div>
+  <input type="number" class="form-control" placeholder="500" max="{{Saldo}}" required minlength="1">
+</div>
+<div class="row">
+  <div class="col text-center">
+      <label>Auf wen willst du setzen?</label>
+  </div>
+</div>
+<button class="btn btn-outline-primary" style="width: 45%;">Blau</button>
+<button class="btn btn-outline-danger float-right" style="width: 45%;">Rot</button>
+<button class="btn btn-success btn-block" style="margin-top: 15px;">GO</button>

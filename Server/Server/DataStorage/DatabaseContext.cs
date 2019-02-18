@@ -8,6 +8,6 @@ namespace Server.DataStorage
             Database.EnsureCreated();
         }
 
-        public DbSet<Account> Accounts { get; set; }
+        public DbSet<User> Accounts { get; set; }
     }
 }

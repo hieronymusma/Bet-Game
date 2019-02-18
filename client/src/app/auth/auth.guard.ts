@@ -13,7 +13,7 @@ export class AuthGuard implements CanActivate {
   async canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     if (this.authCookieService.doesAuthKeyExists()) {
       const authKey = this.authCookieService.getAuthKey();
-      const isValid = await this.dataService.IsUserValid(authKey);
+      const isValid = await this.dataService.isUserValid(authKey);
       if (isValid) {
         return true;
       }

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Server.DataStorage
 {
-    public class Account
+    public class User
     {
         [Key]
         public int Id { get; set; }

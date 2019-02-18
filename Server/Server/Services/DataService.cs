@@ -25,6 +25,11 @@ namespace Server.Services
             return newGuid.ToString();
         }
 
+        public User GetAccountInformation(Guid guid)
+        {
+            return mContext.Accounts.Where(x => x.GUID == guid).Single();
+        }
+
         public bool IsUserValid(Guid guid)
         {
             return mContext.Accounts.Where(account => account.GUID == guid).Count() > 0;
