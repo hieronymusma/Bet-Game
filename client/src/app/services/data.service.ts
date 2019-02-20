@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HubConnectionBuilder, LogLevel, HubConnection, HubConnectionState, JsonHubProtocol, HttpTransportType } from "@aspnet/signalr";
+import { HubConnectionBuilder, LogLevel, HubConnection, HubConnectionState, JsonHubProtocol } from "@aspnet/signalr";
 import { User } from "../server-interfaces/user";
 import { Transaction } from "../server-interfaces/transaction";
 
@@ -13,7 +13,7 @@ export class DataService {
 
   constructor() {
     this._hubConnection = new HubConnectionBuilder()
-      .withUrl("http://" + window.location.hostname + ":5000/BetHub")//, HttpTransportType.LongPolling)
+      .withUrl("http://" + window.location.hostname + ":5000/BetHub")
       .configureLogging(LogLevel.Information)
       .withHubProtocol(new JsonHubProtocol)
       .build();
