@@ -12,11 +12,13 @@ import { AuthGuard } from "./auth/auth.guard";
 import { ErrrorNotificationComponent } from "./errror-notification/errror-notification.component";
 import { AppErrorHandler } from "./error-handler";
 import { LineWrapPipe } from "./pipes/line-wrap.pipe";
+import { WaitComponent } from "./wait/wait.component";
 
 const appRoutes: Routes = [
   { path: "", pathMatch: "full", redirectTo: "/bet" },
   { path: "bet", component: BetComponent, canActivate: [AuthGuard] },
-  { path: "login", component: LoginComponent }
+  { path: "login", component: LoginComponent },
+  { path: "wait", component: WaitComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
@@ -25,7 +27,8 @@ const appRoutes: Routes = [
     LoginComponent,
     BetComponent,
     ErrrorNotificationComponent,
-    LineWrapPipe
+    LineWrapPipe,
+    WaitComponent
   ],
   imports: [
     BrowserModule,

@@ -9,5 +9,7 @@ namespace Server.DataStorage
         }
 
         public DbSet<User> Accounts { get; set; }
+
+        public DbSet<Transaction> Transactions { get; set; }
     }
 }

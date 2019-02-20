@@ -10,13 +10,25 @@
   <div class="text-center">
       <label>Wie viel willst du setzen?</label>
   </div>
-  <input type="number" class="form-control" placeholder="500" max="{{Saldo}}" required minlength="1">
+  <input type="number" class="form-control" placeholder="500" max="{{Saldo}}" required minlength="1" (keyup)="betMoney = $event.target.value">
 </div>
 <div class="row">
   <div class="col text-center">
       <label>Auf wen willst du setzen?</label>
   </div>
 </div>
-<button class="btn btn-outline-primary" style="width: 45%;">Blau</button>
-<button class="btn btn-outline-danger float-right" style="width: 45%;">Rot</button>
-<button class="btn btn-success btn-block" style="margin-top: 15px;">GO</button>
+<button class="btn" 
+        [class.btn-primary]="currentTarget == betTarget.Blue" 
+        [class.btn-outline-primary]="currentTarget != betTarget.Blue" 
+        (click)="target = betTarget.Blue"
+        style="width: 45%;">Blau</button>
+
+<button class="btn float-right" 
+        [class.btn-danger]="currentTarget == betTarget.Red" 
+        [class.btn-outline-danger]="currentTarget != betTarget.Red" 
+        (click)="target = betTarget.Red"
+        style="width: 45%;">Rot</button>
+<button class="btn btn-success btn-block"
+        [disabled]="!canSendTransaction"
+        (click)="bookTransaction()"
+        style="margin-top: 15px;">GO</button>

@@ -31,10 +31,16 @@ namespace Server
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials()
-                    .WithOrigins($"http://localhost:{ANGULAR_PORT}", $"http://{Environment.MachineName}:{ANGULAR_PORT}", $"http://{GetLocalIpAddress()}:{ANGULAR_PORT}");
+                    .WithOrigins($"http://localhost:{ANGULAR_PORT}", 
+                                 $"http://{Environment.MachineName}:{ANGULAR_PORT}", 
+                                 $"http://{GetLocalIpAddress()}:{ANGULAR_PORT}",
+                                 $"http://0.0.0.0:{ANGULAR_PORT}");
             }));
 
-            services.AddSignalR();
+            services.AddSignalR(options =>
+            {
+                options.EnableDetailedErrors = true;
+            });
 
             services.AddScoped<IDataService, DataService>();
             services.AddScoped<IGuidService, GuidService>();

@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
-import { HubConnectionBuilder, LogLevel, HubConnection, HubConnectionState } from "@aspnet/signalr";
-import { User } from '../server-interfaces/account';
+import { HubConnectionBuilder, LogLevel, HubConnection, HubConnectionState, JsonHubProtocol, HttpTransportType } from "@aspnet/signalr";
+import { User } from "../server-interfaces/user";
+import { Transaction } from "../server-interfaces/transaction";
 
 @Injectable({
   providedIn: "root"
@@ -12,8 +13,9 @@ export class DataService {
 
   constructor() {
     this._hubConnection = new HubConnectionBuilder()
-      .withUrl("http://" + window.location.hostname + ":5000/BetHub")
+      .withUrl("http://" + window.location.hostname + ":5000/BetHub")//, HttpTransportType.LongPolling)
       .configureLogging(LogLevel.Information)
+      .withHubProtocol(new JsonHubProtocol)
       .build();
     this._hubConnection.onclose(error => this.onConnectionLost(error));
     this.connect();
@@ -34,6 +36,12 @@ export class DataService {
     console.log("Call CreateUserAndReturnGuid with:", firstName, lastName);
     await this._connectionPromise;
     return this._hubConnection.invoke<string>("CreateUserAndReturnGuid", firstName, lastName);
+  }
+
+  public async bookTransaction(transaction: Transaction): Promise<boolean> {
+    console.log("Call BookTransaction with:", transaction);
+    await this._connectionPromise;
+    return this._hubConnection.invoke<boolean>("BookTransaction", transaction);
   }
 
   public async getAccountInformation(guid: string): Promise<User> {

@@ -37,5 +37,22 @@ namespace Server.BetHub
             var guid = Guid.Parse(guidString);
             return mDataService.GetAccountInformation(guid);
         }
+
+        public bool BookTransaction(Transaction transaction)
+        {
+            if (transaction == null) throw new ArgumentNullException(nameof(transaction));
+            if (transaction.User == null) throw new ArgumentNullException(nameof(transaction));
+
+            try
+            {
+                mDataService.BookTransaction(transaction);
+            }
+            catch (InvalidOperationException)
+            {
+                return false;
+                throw;
+            }
+            return true;
+        }
     }
 }

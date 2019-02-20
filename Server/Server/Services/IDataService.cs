@@ -10,5 +10,7 @@ namespace Server.Services
         string CreateUserAndReturnGuid(string fristName, string lastName);
 
         User GetAccountInformation(Guid guid);
+
+        void BookTransaction(Transaction transaction);
     }
 }
