@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HubConnectionBuilder, LogLevel, HubConnection, HubConnectionState, JsonHubProtocol } from "@aspnet/signalr";
+import { HubConnectionBuilder, LogLevel, HubConnection } from "@aspnet/signalr";
 import { User } from "../server-interfaces/user";
 import { Transaction } from "../server-interfaces/transaction";
 
@@ -15,7 +15,6 @@ export class DataService {
     this._hubConnection = new HubConnectionBuilder()
       .withUrl("http://" + window.location.hostname + ":5000/BetHub")
       .configureLogging(LogLevel.Information)
-      .withHubProtocol(new JsonHubProtocol)
       .build();
     this._hubConnection.onclose(error => this.onConnectionLost(error));
     this.connect();

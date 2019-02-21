@@ -1,5 +1,5 @@
 {
-  "name": "client",
+  "name": "administration",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -19,11 +19,10 @@
     "@angular/platform-browser": "~7.1.0",
     "@angular/platform-browser-dynamic": "~7.1.0",
     "@angular/router": "~7.1.0",
-    "@aspnet/signalr": "^1.1.0",
+    "@aspnet/signalr": "^1.1.2",
     "bootstrap": "^4.3.1",
     "core-js": "^2.5.4",
     "jquery": "^3.3.1",
-    "ngx-cookie-service": "^2.1.0",
     "ngx-spinner": "^7.0.0",
     "popper.js": "^1.14.7",
     "rxjs": "~6.3.3",
@@ -31,8 +30,8 @@
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.12.1",
-    "@angular/cli": "~7.3.1",
+    "@angular-devkit/build-angular": "^0.13.3",
+    "@angular/cli": "~7.1.4",
     "@angular/compiler-cli": "^7.2.6",
     "@angular/language-service": "~7.1.0",
     "@types/jasmine": "~2.8.8",

@@ -14,5 +14,7 @@ namespace Server.Services
         void BookTransaction(Transaction transaction);
 
         bool IsAlreadyAnTransactionPending(Guid guid);
+
+        void RecreateDatabase();
     }
 }

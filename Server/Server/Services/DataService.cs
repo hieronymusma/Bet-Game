@@ -61,5 +61,11 @@ namespace Server.Services
         {
             return mContext.Accounts.Where(account => account.GUID == guid).Count() > 0;
         }
+
+        public void RecreateDatabase()
+        {
+            mContext.Database.EnsureDeleted();
+            mContext.Database.EnsureCreated();
+        }
     }
 }

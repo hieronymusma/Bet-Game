@@ -3,7 +3,7 @@ using Server.DataStorage;
 using Server.Services;
 using System;
 
-namespace Server.BetHub
+namespace Server.Hubs
 {
     public class BetHub : Hub
     {
@@ -15,7 +15,6 @@ namespace Server.BetHub
         }
 
         public bool IsUserValid(Guid guid)
-
         {
             return mDataService.IsUserValid(guid);
         }
