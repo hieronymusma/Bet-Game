@@ -14,11 +14,9 @@ namespace Server.BetHub
             mDataService = dataService ?? throw new ArgumentNullException(nameof(dataService));
         }
 
-        public bool IsUserValid(string guidString)
-        {
-            if (string.IsNullOrWhiteSpace(guidString)) throw new ArgumentNullException(nameof(guidString));
+        public bool IsUserValid(Guid guid)
 
-            var guid = Guid.Parse(guidString);
+        {
             return mDataService.IsUserValid(guid);
         }
 
@@ -30,11 +28,8 @@ namespace Server.BetHub
             return mDataService.CreateUserAndReturnGuid(firstname, lastname);
         }
 
-        public User GetAccountInformation(string guidString)
+        public User GetAccountInformation(Guid guid)
         {
-            if (string.IsNullOrWhiteSpace(guidString)) throw new ArgumentNullException(nameof(guidString));
-
-            var guid = Guid.Parse(guidString);
             return mDataService.GetAccountInformation(guid);
         }
 
@@ -53,6 +48,11 @@ namespace Server.BetHub
                 throw;
             }
             return true;
+        }
+
+        public bool IsAlreadyAnTransactionPending(Guid guidString)
+        {
+            return mDataService.IsAlreadyAnTransactionPending(guidString);
         }
     }
 }

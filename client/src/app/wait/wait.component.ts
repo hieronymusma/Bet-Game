@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: "app-wait",
@@ -7,9 +8,10 @@ import { Component, OnInit } from "@angular/core";
 })
 export class WaitComponent implements OnInit {
 
-  constructor() { }
+  constructor(private spinnerService: NgxSpinnerService) { }
 
   ngOnInit() {
+    this.spinnerService.show();
   }
 
 }

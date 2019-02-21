@@ -50,6 +50,12 @@ export class DataService {
     return this._hubConnection.invoke<User>("GetAccountInformation", guid);
   }
 
+  public async isAlreadyAnTransactionPending(guid: string): Promise<boolean> {
+    console.log("Call IsAlreadyAnTransactionPending with:", guid);
+    await this._connectionPromise;
+    return this._hubConnection.invoke<boolean>("IsAlreadyAnTransactionPending", guid);
+  }
+
   private onConnectionLost(error: Error): void {
     console.log("Connection was disconnected. Error:", error);
     this.connect();

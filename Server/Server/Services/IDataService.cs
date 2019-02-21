@@ -12,5 +12,7 @@ namespace Server.Services
         User GetAccountInformation(Guid guid);
 
         void BookTransaction(Transaction transaction);
+
+        bool IsAlreadyAnTransactionPending(Guid guid);
     }
 }

@@ -52,6 +52,11 @@ namespace Server.Services
             return mContext.Accounts.Where(x => x.GUID == guid).Single();
         }
 
+        public bool IsAlreadyAnTransactionPending(Guid guid)
+        {
+            return mContext.Transactions.Where(t => t.User.GUID == guid).Count() > 0;
+        }
+
         public bool IsUserValid(Guid guid)
         {
             return mContext.Accounts.Where(account => account.GUID == guid).Count() > 0;

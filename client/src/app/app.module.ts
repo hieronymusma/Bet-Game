@@ -13,10 +13,11 @@ import { ErrrorNotificationComponent } from "./errror-notification/errror-notifi
 import { AppErrorHandler } from "./error-handler";
 import { LineWrapPipe } from "./pipes/line-wrap.pipe";
 import { WaitComponent } from "./wait/wait.component";
+import { TransactionGuard } from "./auth/transaction.guard";
 
 const appRoutes: Routes = [
   { path: "", pathMatch: "full", redirectTo: "/bet" },
-  { path: "bet", component: BetComponent, canActivate: [AuthGuard] },
+  { path: "bet", component: BetComponent, canActivate: [AuthGuard, TransactionGuard] },
   { path: "login", component: LoginComponent },
   { path: "wait", component: WaitComponent, canActivate: [AuthGuard] }
 ];

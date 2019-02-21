@@ -51,7 +51,7 @@ export class BetComponent implements OnInit {
 
   public get canSendTransaction(): boolean {
     if (this.transaction.betMoney && this.transaction.betTarget != null && this.transaction.user) {
-      if (!isNaN(this.transaction.betMoney) && this.transaction.betMoney < this.Account.saldo) {
+      if (!isNaN(this.transaction.betMoney) && this.transaction.betMoney <= this.Account.saldo) {
         return true;
       }
     }
