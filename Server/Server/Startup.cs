@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using Microsoft.AspNetCore.Builder;
@@ -22,7 +20,7 @@ namespace Server
         {
             services.AddDbContext<DatabaseContext>(options =>
             {
-                options.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Database=PShuttle;Trusted_Connection=True;MultipleActiveResultSets=true");
+                options.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Database=BetGame;Trusted_Connection=True;MultipleActiveResultSets=true");
             });
 
             services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>

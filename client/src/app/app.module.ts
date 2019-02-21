@@ -12,7 +12,7 @@ import { AuthGuard } from "./auth/auth.guard";
 import { ErrrorNotificationComponent } from "./errror-notification/errror-notification.component";
 import { AppErrorHandler } from "./error-handler";
 import { LineWrapPipe } from "./pipes/line-wrap.pipe";
-import { WaitComponent } from "./wait/wait.component";
+import { WaitComponent } from "./components/wait/wait.component";
 import { TransactionGuard } from "./auth/transaction.guard";
 
 const appRoutes: Routes = [
