@@ -1,16 +1,11 @@
-<div class="modal" id="errorModal" tabindex="-1">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">{{error?.title}}</h4>
-                <button type="button" class="close" (click)="closeModal()"><span>&times;</span></button>
-            </div>
-            <div class="modal-body error-modal-body">
-                <p>Description: {{error?.shortmessage}}</p>
-                <p>Error message:<p>
-                <span class="error-line-wrap">{{error?.longmessage | lineWrap}}</span>
-            </div>
-        </div>
-    </div>
+<div class="modal-header">
+    <h4 class="modal-title">{{error.title}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+    </button>
 </div>
-<div class="error-background" *ngIf="!showErrorModal"></div>
+<div class="modal-body">
+    <p>Description: {{error.shortmessage}}</p>
+    <p>Error message:<p>
+    <span class="error-line-wrap">{{error.longmessage | lineWrap}}</span>
+</div>

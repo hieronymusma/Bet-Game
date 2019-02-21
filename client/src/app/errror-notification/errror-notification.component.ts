@@ -1,46 +1,19 @@
-import { Component, OnInit } from "@angular/core";
-import { ErrorNotificationService } from "../services/error-notification.service";
+import { Component, Input, ChangeDetectorRef } from "@angular/core";
 import { ErrorMessage } from "../error";
-import { NgxSpinnerService } from 'ngx-spinner';
-
-declare var $: any;
+import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: "app-errror-notification",
   templateUrl: "./errror-notification.component.html",
   styleUrls: ["./errror-notification.component.scss"]
 })
-export class ErrrorNotificationComponent implements OnInit {
+export class ErrrorNotificationComponent {
 
-  public showErrorModal = false;
+  public error: ErrorMessage;
 
-  constructor(private errorNotification: ErrorNotificationService, private spinnerService: NgxSpinnerService) { }
+  constructor(public activeModal: NgbActiveModal, private changeDetectorRef: ChangeDetectorRef) { }
 
-  ngOnInit(): void {
-      this.errorNotification.errorOccured.subscribe((() => {
-          this.openModal();
-      }).bind(this));
-  }
-
-  get error(): ErrorMessage {
-    if (this.errorNotification.firstError) {
-      return this.errorNotification.firstError;
-    }
-    return {
-      longmessage: "",
-      shortmessage: "",
-      title: ""
-    }
-  }
-
-  public openModal() {
-    this.showErrorModal = true;
-    this.spinnerService.hide();
-    $("#errorModal").modal("show");
-  }
-
-  public closeModal() {
-    this.showErrorModal = false;
-    return true;
+  public update() {
+    this.changeDetectorRef.detectChanges();
   }
 }

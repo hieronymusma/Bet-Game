@@ -14,6 +14,7 @@ import { AppErrorHandler } from "./error-handler";
 import { LineWrapPipe } from "./pipes/line-wrap.pipe";
 import { WaitComponent } from "./components/wait/wait.component";
 import { TransactionGuard } from "./auth/transaction.guard";
+import { NgbModule, NgbModalModule } from "@ng-bootstrap/ng-bootstrap";
 
 const appRoutes: Routes = [
   { path: "", pathMatch: "full", redirectTo: "/bet" },
@@ -27,14 +28,18 @@ const appRoutes: Routes = [
     AppComponent,
     LoginComponent,
     BetComponent,
-    ErrrorNotificationComponent,
     LineWrapPipe,
-    WaitComponent
+    WaitComponent,
+    ErrrorNotificationComponent
+  ],
+  entryComponents: [
+    ErrrorNotificationComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NgbModule
   ],
   providers: [
     CookieService,
