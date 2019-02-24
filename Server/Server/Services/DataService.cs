@@ -67,5 +67,14 @@ namespace Server.Services
             mContext.Database.EnsureDeleted();
             mContext.Database.EnsureCreated();
         }
+
+        public IEnumerable<UserStatus> GetUserStatus()
+        {
+            foreach(var user in mContext.Accounts)
+            {
+                var hasTransaction = mContext.Transactions.Where(t => t.UserId == user.UserId).Count() > 0;
+                yield return new UserStatus { User = user, HasTransaction = hasTransaction };
+            }
+        }
     }
 }

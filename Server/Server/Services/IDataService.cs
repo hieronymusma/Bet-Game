@@ -1,5 +1,6 @@
 ﻿using Server.DataStorage;
 using System;
+using System.Collections.Generic;
 
 namespace Server.Services
 {
@@ -16,5 +17,7 @@ namespace Server.Services
         bool IsAlreadyAnTransactionPending(Guid guid);
 
         void RecreateDatabase();
+
+        IEnumerable<UserStatus> GetUserStatus();
     }
 }

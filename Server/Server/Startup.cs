@@ -38,6 +38,7 @@ namespace Server
 
             services.AddScoped<IDataService, DataService>();
             services.AddScoped<IGuidService, GuidService>();
+            services.AddScoped<IRefreshService, RefreshService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,6 +55,7 @@ namespace Server
             {
                 routes.MapHub<BetHub>("/BetHub");
                 routes.MapHub<AdminHub>("/AdminHub");
+                routes.MapHub<DashboardHub>("/DashboardHub");
             });
         }
     }

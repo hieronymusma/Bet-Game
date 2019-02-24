@@ -8,10 +8,12 @@ namespace Server.Hubs
     public class BetHub : Hub
     {
         private readonly IDataService mDataService;
+        private readonly IRefreshService mRefreshService;
 
-        public BetHub(IDataService dataService)
+        public BetHub(IDataService dataService, IRefreshService refreshService)
         {
             mDataService = dataService ?? throw new ArgumentNullException(nameof(dataService));
+            mRefreshService = refreshService ?? throw new ArgumentNullException(nameof(refreshService));
         }
 
         public bool IsUserValid(Guid guid)
@@ -24,7 +26,11 @@ namespace Server.Hubs
             if (string.IsNullOrWhiteSpace(firstname)) throw new ArgumentNullException(nameof(firstname));
             if (string.IsNullOrWhiteSpace(lastname)) throw new ArgumentNullException(nameof(lastname));
 
-            return mDataService.CreateUserAndReturnGuid(firstname, lastname);
+            var guid = mDataService.CreateUserAndReturnGuid(firstname, lastname);
+
+            mRefreshService.UpdateUserDashboard();
+
+            return guid;
         }
 
         public User GetAccountInformation(Guid guid)
@@ -46,6 +52,8 @@ namespace Server.Hubs
                 return false;
                 throw;
             }
+
+            mRefreshService.UpdateUserDashboard();
             return true;
         }
 
