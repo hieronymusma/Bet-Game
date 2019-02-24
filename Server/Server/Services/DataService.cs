@@ -76,5 +76,17 @@ namespace Server.Services
                 yield return new UserStatus { User = user, HasTransaction = hasTransaction };
             }
         }
+
+        public void BookTransactions(BetTarget target)
+        {
+            foreach(var transaction in mContext.Transactions)
+            {
+                var newMoney = transaction.BetTarget == target ? transaction.BetMoney : -transaction.BetMoney;
+                var user = mContext.Accounts.Single(u => u.UserId == transaction.UserId);
+                user.Saldo += newMoney;
+            }
+            mContext.Transactions.RemoveRange(mContext.Transactions);
+            mContext.SaveChanges();
+        }
     }
 }

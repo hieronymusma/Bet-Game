@@ -19,5 +19,7 @@ namespace Server.Services
         void RecreateDatabase();
 
         IEnumerable<UserStatus> GetUserStatus();
+
+        void BookTransactions(BetTarget target);
     }
 }

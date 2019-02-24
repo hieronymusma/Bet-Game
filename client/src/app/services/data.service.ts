@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, EventEmitter } from "@angular/core";
 import { HubConnectionBuilder, LogLevel, HubConnection } from "@aspnet/signalr";
 import { User } from "../server-interfaces/user";
 import { Transaction } from "../server-interfaces/transaction";
@@ -7,6 +7,8 @@ import { Transaction } from "../server-interfaces/transaction";
   providedIn: "root"
 })
 export class DataService {
+
+  public waitingFinished$ = new EventEmitter();
 
   private _hubConnection: HubConnection;
   private _connectionPromise: Promise<void>;
@@ -17,6 +19,9 @@ export class DataService {
       .configureLogging(LogLevel.Information)
       .build();
     this._hubConnection.onclose(error => this.onConnectionLost(error));
+    this._hubConnection.on("WaitingFinished", () => {
+      this.waitingFinished$.emit();
+    });
     this.connect();
   }
 

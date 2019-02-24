@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HubConnectionBuilder, LogLevel, HubConnection } from "@aspnet/signalr";
+import { BetTarget } from '../bet-target';
 
 @Injectable({
   providedIn: "root"
@@ -32,5 +33,11 @@ export class DataService {
     console.log("Call recreateDatabse");
     await this._connectionPromise;
     return this._hubConnection.invoke("RecreateDatabase");
+  }
+
+  public async bookTransactions(target: BetTarget): Promise<void> {
+    console.log("Call book transactions");
+    await this._connectionPromise;
+    return this._hubConnection.invoke("BookTransactions", target);
   }
 }

@@ -4,8 +4,13 @@ namespace Server.DataStorage
 {
     public class DatabaseContext : DbContext
     {
+        private static object lockObject = new object();
+
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options) {
-            Database.EnsureCreated();
+            lock (lockObject)
+            {
+                Database.EnsureCreated();
+            }
         }
 
         public DbSet<User> Accounts { get; set; }
