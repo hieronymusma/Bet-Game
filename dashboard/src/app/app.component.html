@@ -10,7 +10,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let user of userData; let i = index">
+      <tr *ngFor="let user of userData | sort; let i = index">
         <th scope="row">{{ i + 1}}</th>
         <td>{{user.user.firstName}}</td>
         <td>{{user.user.lastName}}</td>
