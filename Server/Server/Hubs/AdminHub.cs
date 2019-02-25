@@ -29,5 +29,11 @@ namespace Server.Hubs
             mRefreshService.UpdateUserDashboard();
             mBetHubContext.Clients.All.SendAsync("WaitingFinished").Wait();
         }
+
+        public void DeleteTransactions()
+        {
+            mDataService.DeleteTransactions();
+            mRefreshService.UpdateUserDashboard();
+        }
     }
 }

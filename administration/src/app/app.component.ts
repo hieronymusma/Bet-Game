@@ -25,4 +25,10 @@ export class AppComponent {
     await this.dataService.bookTransactions(target);
     this.spinnerService.hide();
   }
+
+  public async deleteTransactions() {
+    this.spinnerService.show();
+    await this.dataService.deleteTransactions();
+    this.spinnerService.hide();
+  }
 }

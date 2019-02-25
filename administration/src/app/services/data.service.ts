@@ -40,4 +40,10 @@ export class DataService {
     await this._connectionPromise;
     return this._hubConnection.invoke("BookTransactions", target);
   }
+
+  public async deleteTransactions(): Promise<void> {
+    console.log("Call delete transactions");
+    await this._connectionPromise;
+    return this._hubConnection.invoke("DeleteTransactions");
+  }
 }

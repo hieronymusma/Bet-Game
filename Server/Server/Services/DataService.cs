@@ -85,6 +85,11 @@ namespace Server.Services
                 var user = mContext.Accounts.Single(u => u.UserId == transaction.UserId);
                 user.Saldo += newMoney;
             }
+            DeleteTransactions();
+        }
+
+        public void DeleteTransactions()
+        {
             mContext.Transactions.RemoveRange(mContext.Transactions);
             mContext.SaveChanges();
         }

@@ -21,5 +21,7 @@ namespace Server.Services
         IEnumerable<UserStatus> GetUserStatus();
 
         void BookTransactions(BetTarget target);
+
+        void DeleteTransactions();
     }
 }
