@@ -1,20 +1,25 @@
 <h1 class="text-center">Administration</h1>
 <div class="container">
-  <div class="row">
-      <div class="col-xs-1">
-          <button class="btn btn-primary" (click)="bookTransactions(targets.Blue)">Book Transactions (Blue)</button>
-      </div>
-      <div class="col-xs-1">
-          <button class="btn btn-danger" (click)="bookTransactions(targets.Red)">Book Transactions (Red)</button>
-      </div>
-  </div>
-  <div class="row">
-      <div class="col-xs-1">
-          <button class="btn btn-primary" (click)="recreateDatabse()">Recreate Database</button>
-      </div>
-      <div class="col-xs-1">
-        <button class="btn btn-primary" (click)="deleteTransactions()">Delete Transactions</button>
+    <div class="row btn-toolbar">
+        <div class="col-sm-6 text-center">
+            <button class="btn btn-primary" (click)="bookTransactions(targets.Blue)">Book Transactions (Blue)</button>
+        </div>
+        <div class="col-sm-6 text-center">
+            <button class="btn btn-danger" (click)="bookTransactions(targets.Red)">Book Transactions (Red)</button>
+        </div>
     </div>
-  </div>
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <button class="btn btn-info" (click)="setMoney()">Set Money</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 text-center">
+            <button class="btn btn-primary" (click)="recreateDatabse()">Recreate Database</button>
+        </div>
+        <div class="col-sm-6 text-center">
+            <button class="btn btn-primary" (click)="deleteTransactions()">Delete Transactions</button>
+        </div>
+    </div>
 </div>
 <ngx-spinner type="ball-clip-rotate" bdColor="rgba(229,229,229,0.5)" color="rgba(40,40,40,1)"></ngx-spinner>
