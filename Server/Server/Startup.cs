@@ -57,6 +57,17 @@ namespace Server
                 routes.MapHub<AdminHub>("/AdminHub");
                 routes.MapHub<DashboardHub>("/DashboardHub");
             });
+
+            EnsureDatabaseCreated(app);
+        }
+
+        private void EnsureDatabaseCreated(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<DatabaseContext>();
+                context.Database.EnsureCreated();
+            }
         }
     }
 }
