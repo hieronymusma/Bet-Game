@@ -3,7 +3,7 @@ import { DataService } from "./services/data.service";
 import { NgxSpinnerService } from "ngx-spinner";
 import { BetTarget } from "./bet-target";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import { SetMoneyComponent } from './set-money/set-money.component';
+import { SetMoneyComponent } from "./set-money/set-money.component";
 
 @Component({
   selector: "app-root",
@@ -39,6 +39,5 @@ export class AppComponent {
 
   public setMoney() {
     const modalRef = this.modalService.open(SetMoneyComponent);
-    modalRef.componentInstance.name = "World";
   }
 }

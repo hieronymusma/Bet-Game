@@ -2,6 +2,7 @@
 using Server.DataStorage;
 using Server.Services;
 using System;
+using System.Collections.Generic;
 
 namespace Server.Hubs
 {
@@ -34,6 +35,16 @@ namespace Server.Hubs
         {
             mDataService.DeleteTransactions();
             mRefreshService.UpdateUserDashboard();
+        }
+
+        public IEnumerable<User> GetAllUsers()
+        {
+            return mDataService.GetAllUsers();
+        }
+
+        public void ChangeMoney(User user, int money)
+        {
+            mDataService.ChangeMoney(user, money);
         }
     }
 }

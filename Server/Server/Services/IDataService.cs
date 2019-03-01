@@ -20,8 +20,12 @@ namespace Server.Services
 
         IEnumerable<UserStatus> GetUserStatus();
 
+        IEnumerable<User> GetAllUsers();
+
         void BookTransactions(BetTarget target);
 
         void DeleteTransactions();
+
+        void ChangeMoney(User user, int money);
     }
 }

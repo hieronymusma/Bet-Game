@@ -1,7 +1,7 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { NgxSpinnerModule } from "ngx-spinner";
-import { NgbModalModule } from "@ng-bootstrap/ng-bootstrap";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { AppComponent } from "./app.component";
 import { SetMoneyComponent } from "./set-money/set-money.component";
 
@@ -13,7 +13,7 @@ import { SetMoneyComponent } from "./set-money/set-money.component";
   imports: [
     BrowserModule,
     NgxSpinnerModule,
-    NgbModalModule
+    NgbModule,
   ],
   providers: [],
   bootstrap: [

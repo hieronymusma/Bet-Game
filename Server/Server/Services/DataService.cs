@@ -96,5 +96,17 @@ namespace Server.Services
             mContext.Transactions.RemoveRange(mContext.Transactions);
             mContext.SaveChanges();
         }
+
+        public IEnumerable<User> GetAllUsers()
+        {
+            return mContext.Accounts.ToList();
+        }
+
+        public void ChangeMoney(User user, int money)
+        {
+            var contextUser = mContext.Accounts.First(x => x.GUID == user.GUID);
+            contextUser.Saldo = money;
+            mContext.SaveChanges();
+        }
     }
 }

@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HubConnectionBuilder, LogLevel, HubConnection } from "@aspnet/signalr";
-import { BetTarget } from '../bet-target';
+import { BetTarget } from "../bet-target";
+import { User } from "../server-interfaces/user";
 
 @Injectable({
   providedIn: "root"
@@ -45,5 +46,17 @@ export class DataService {
     console.log("Call delete transactions");
     await this._connectionPromise;
     return this._hubConnection.invoke("DeleteTransactions");
+  }
+
+  public async getAllUsers(): Promise<Array<User>> {
+    console.log("Call getAllUsers");
+    await this._connectionPromise;
+    return this._hubConnection.invoke("GetAllUsers");
+  }
+
+  public async changeMoney(user: User, money: number): Promise<void> {
+    console.log("Call changeMoney with:", user);
+    await this._connectionPromise;
+    return this._hubConnection.invoke("ChangeMoney", user, money);
   }
 }
