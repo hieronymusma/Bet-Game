@@ -70,11 +70,14 @@ namespace Server.Services
 
         public IEnumerable<UserStatus> GetUserStatus()
         {
+            var userStatusList = new List<UserStatus>();
             foreach(var user in mContext.Accounts)
             {
                 var hasTransaction = mContext.Transactions.Where(t => t.UserId == user.UserId).Count() > 0;
-                yield return new UserStatus { User = user, HasTransaction = hasTransaction };
+                var userStatus = new UserStatus { User = user, HasTransaction = hasTransaction };
+                userStatusList.Add(userStatus);
             }
+            return userStatusList;
         }
 
         public void BookTransactions(BetTarget target)
