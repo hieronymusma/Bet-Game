@@ -6,13 +6,15 @@ import { AppComponent } from "./app.component";
 import { SetMoneyComponent } from "./set-money/set-money.component";
 import { UserSelectorComponent } from "./user-selector/user-selector.component";
 import { CreateUserComponent } from "./create-user/create-user.component";
+import { SetTransactionComponent } from "./set-transaction/set-transaction.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     SetMoneyComponent,
     UserSelectorComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    SetTransactionComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +27,8 @@ import { CreateUserComponent } from "./create-user/create-user.component";
   ],
   entryComponents: [
     SetMoneyComponent,
-    CreateUserComponent
+    CreateUserComponent,
+    SetTransactionComponent
   ]
 })
 export class AppModule { }

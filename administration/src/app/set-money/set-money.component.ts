@@ -1,8 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from "@angular/core";
 import { NgbActiveModal } from "@ng-bootstrap/ng-bootstrap";
-import { Observable } from "rxjs";
-import {debounceTime, distinctUntilChanged, map} from "rxjs/operators";
-import { User } from "../server-interfaces/user";
 import { DataService } from "../services/data.service";
 import { NgxSpinnerService } from "ngx-spinner";
 import { UserSelectorComponent } from "../user-selector/user-selector.component";

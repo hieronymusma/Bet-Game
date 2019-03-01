@@ -4,7 +4,6 @@ import { AuthCookieService } from "src/app/services/auth-cookie.service";
 import { User } from "src/app/server-interfaces/user";
 import { Transaction, BetTarget } from "src/app/server-interfaces/transaction";
 import { Router } from "@angular/router";
-import { SelectedBetTargetService } from "src/app/services/selected-bet-target.service";
 
 @Component({
   selector: "app-bet",
@@ -62,8 +61,7 @@ export class BetComponent implements OnInit {
 
   constructor(private dataService: DataService,
               private authService: AuthCookieService,
-              private router: Router,
-              private selectedBetTarget: SelectedBetTargetService) { }
+              private router: Router) { }
 
   async ngOnInit() {
     this.dataService.updatedMoney$.subscribe(() => this.refreshUserData());
@@ -74,7 +72,6 @@ export class BetComponent implements OnInit {
     if (this.canSendTransaction) {
       const successful = this.dataService.bookTransaction(this.transaction);
       if (successful) {
-        this.selectedBetTarget.selectedTarget = this.transaction.betTarget;
         this.router.navigate(["/wait"]);
       } else {
         console.error("Error booking transaction:", this.transaction);

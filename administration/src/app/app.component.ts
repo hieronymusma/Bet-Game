@@ -5,6 +5,7 @@ import { BetTarget } from "./bet-target";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { SetMoneyComponent } from "./set-money/set-money.component";
 import { CreateUserComponent } from "./create-user/create-user.component";
+import { SetTransactionComponent } from "./set-transaction/set-transaction.component";
 
 @Component({
   selector: "app-root",
@@ -44,5 +45,9 @@ export class AppComponent {
 
   public createUser() {
     this.modalService.open(CreateUserComponent);
+  }
+
+  public setTransaction() {
+    this.modalService.open(SetTransactionComponent);
   }
 }

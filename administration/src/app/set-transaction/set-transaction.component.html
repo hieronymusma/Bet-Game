@@ -1,0 +1,35 @@
+<div class="modal-header">
+    <h4 class="modal-title">Set Money of User</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+      <div class="form-group">
+          <div class="text-center">
+              <label>Benutzer</label>
+          </div>
+          <app-user-selector></app-user-selector>
+      </div>
+      <div class="form-group">
+          <div class="text-center">
+              <label>Geld</label>
+          </div>
+          <input type="number" class="form-control" placeholder="500" required minlength="1" (keyup)="betMoney = $event.target.value">
+      </div>
+      <button class="btn" 
+        [class.btn-primary]="currentTarget == betTarget.Blue" 
+        [class.btn-outline-primary]="currentTarget != betTarget.Blue" 
+        (click)="target = betTarget.Blue"
+        style="width: 45%;">Blau</button>
+
+        <button class="btn float-right" 
+        [class.btn-danger]="currentTarget == betTarget.Red" 
+        [class.btn-outline-danger]="currentTarget != betTarget.Red" 
+        (click)="target = betTarget.Red"
+        style="width: 45%;">Rot</button>
+
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="createTransaction()">Create Transaction</button>
+  </div>

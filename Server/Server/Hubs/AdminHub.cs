@@ -12,7 +12,9 @@ namespace Server.Hubs
         private readonly IHubContext<BetHub> mBetHubContext;
         private readonly IRefreshService mRefreshService;
 
-        public AdminHub(IDataService dataService, IHubContext<BetHub> betHubContext, IRefreshService refreshService)
+        public AdminHub(IDataService dataService,
+            IHubContext<BetHub> betHubContext,
+            IRefreshService refreshService)
         {
             mDataService = dataService ?? throw new ArgumentNullException(nameof(dataService));
             mBetHubContext = betHubContext ?? throw new ArgumentNullException(nameof(betHubContext));
@@ -52,14 +54,27 @@ namespace Server.Hubs
 
         public string CreateUserAndReturnGuid(string firstname, string lastname)
         {
-            if (string.IsNullOrWhiteSpace(firstname)) throw new ArgumentNullException(nameof(firstname));
-            if (string.IsNullOrWhiteSpace(lastname)) throw new ArgumentNullException(nameof(lastname));
-
             var guid = mDataService.CreateUserAndReturnGuid(firstname, lastname);
 
             mRefreshService.UpdateUserDashboard();
 
             return guid;
+        }
+
+        public bool BookTransaction(Transaction transaction)
+        {
+            try
+            {
+                mDataService.BookTransaction(transaction);
+            }
+            catch (InvalidOperationException)
+            {
+                return false;
+                throw;
+            }
+
+            mRefreshService.UpdateUserDashboard();
+            return true;
         }
     }
 }

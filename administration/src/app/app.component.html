@@ -1,10 +1,11 @@
 <h1 class="text-center">Administration</h1>
 <div class="container">
     <div class="row btn-toolbar">
-        <div class="col-sm-6 text-center">
+        <div class="col-sm-4 text-center">
             <button class="btn btn-primary" (click)="bookTransactions(targets.Blue)">Book Transactions (Blue)</button>
         </div>
-        <div class="col-sm-6 text-center">
+        <div class="col-sm-4 text-center"></div>
+        <div class="col-sm-4 text-center">
             <button class="btn btn-danger" (click)="bookTransactions(targets.Red)">Book Transactions (Red)</button>
         </div>
     </div>
@@ -15,12 +16,16 @@
         <div class="col-sm-4 text-center">
             <button class="btn btn-info" (click)="setMoney()">Set Money</button>
         </div>
+        <div class="col-sm-4 text-center">
+            <button class="btn btn-info" (click)="setTransaction()">Create Transaction</button>
+        </div>
     </div>
     <div class="row">
-        <div class="col-sm-6 text-center">
+        <div class="col-sm-4 text-center">
             <button class="btn btn-primary" (click)="recreateDatabse()">Recreate Database</button>
         </div>
-        <div class="col-sm-6 text-center">
+        <div class="col-sm-4 text-center"></div>
+        <div class="col-sm-4 text-center">
             <button class="btn btn-primary" (click)="deleteTransactions()">Delete Transactions</button>
         </div>
     </div>
