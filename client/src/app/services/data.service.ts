@@ -9,6 +9,7 @@ import { Transaction } from "../server-interfaces/transaction";
 export class DataService {
 
   public waitingFinished$ = new EventEmitter();
+  public updatedMoney$ = new EventEmitter();
 
   private _hubConnection: HubConnection;
   private _connectionPromise: Promise<void>;
@@ -19,9 +20,15 @@ export class DataService {
       .configureLogging(LogLevel.Information)
       .build();
     this._hubConnection.onclose(error => this.onConnectionLost(error));
+
     this._hubConnection.on("WaitingFinished", () => {
       this.waitingFinished$.emit();
     });
+
+    this._hubConnection.on("UpdatedMoney", () => {
+      this.updatedMoney$.emit();
+    });
+
     this.connect();
   }
 

@@ -45,6 +45,7 @@ namespace Server.Hubs
         public void ChangeMoney(User user, int money)
         {
             mDataService.ChangeMoney(user, money);
+            mBetHubContext.Clients.All.SendAsync("UpdatedMoney").Wait();
         }
     }
 }

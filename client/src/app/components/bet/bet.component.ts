@@ -66,7 +66,8 @@ export class BetComponent implements OnInit {
               private selectedBetTarget: SelectedBetTargetService) { }
 
   async ngOnInit() {
-    this.transaction.user = await this.dataService.getAccountInformation(this.authService.getAuthKey());
+    this.dataService.updatedMoney$.subscribe(() => this.refreshUserData());
+    await this.refreshUserData();
   }
 
   public bookTransaction(): void {
@@ -79,5 +80,9 @@ export class BetComponent implements OnInit {
         console.error("Error booking transaction:", this.transaction);
       }
     }
+  }
+
+  private async refreshUserData(): Promise<void> {
+    this.transaction.user = await this.dataService.getAccountInformation(this.authService.getAuthKey());
   }
 }
