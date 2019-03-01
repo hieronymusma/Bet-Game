@@ -39,6 +39,12 @@ export class AppComponent {
     this.spinnerService.hide();
   }
 
+  public async toggleDashboardMode() {
+    this.spinnerService.show();
+    await this.dataService.toggleDashboardMode();
+    this.spinnerService.hide();
+  }
+
   public setMoney() {
     this.modalService.open(SetMoneyComponent);
   }

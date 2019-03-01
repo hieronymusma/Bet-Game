@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { DataService } from "./services/data.service";
 import { UserStatus } from "./server-interfaces/user-status";
 
@@ -7,12 +7,13 @@ import { UserStatus } from "./server-interfaces/user-status";
   templateUrl: "./app.component.html",
   styleUrls: ["./app.component.scss"]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
-  public userData: Array<UserStatus> = [];
+  public isTableActive = true;
 
-  constructor(private dataService: DataService) {
-    this.dataService.newUserDataAvailable$.subscribe((data: Array<UserStatus>) => this.userData = data);
-    this.dataService.getAllUser();
+  constructor(private dataService: DataService) {  }
+
+  ngOnInit(): void {
+    this.dataService.toggleDashboardMode$.subscribe(() => this.isTableActive = !this.isTableActive);
   }
 }

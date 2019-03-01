@@ -11,14 +11,17 @@ namespace Server.Hubs
         private readonly IDataService mDataService;
         private readonly IHubContext<BetHub> mBetHubContext;
         private readonly IRefreshService mRefreshService;
+        private readonly IHubContext<DashboardHub> mDashboardHubContext;
 
         public AdminHub(IDataService dataService,
             IHubContext<BetHub> betHubContext,
+            IHubContext<DashboardHub> dashboardHubContext,
             IRefreshService refreshService)
         {
             mDataService = dataService ?? throw new ArgumentNullException(nameof(dataService));
             mBetHubContext = betHubContext ?? throw new ArgumentNullException(nameof(betHubContext));
             mRefreshService = refreshService ?? throw new ArgumentNullException(nameof(refreshService));
+            mDashboardHubContext = dashboardHubContext ?? throw new ArgumentNullException(nameof(dashboardHubContext));
         }
 
         public void RecreateDatabase()
@@ -75,6 +78,11 @@ namespace Server.Hubs
 
             mRefreshService.UpdateUserDashboard();
             return true;
+        }
+
+        public void ToggleDashboardMode()
+        {
+            mDashboardHubContext.Clients.All.SendAsync("ToggleDashboardMode");
         }
     }
 }

@@ -8,6 +8,7 @@ import { UserStatus } from "../server-interfaces/user-status";
 export class DataService {
 
   public newUserDataAvailable$ = new EventEmitter<Array<UserStatus>>();
+  public toggleDashboardMode$ = new EventEmitter();
 
   private _hubConnection: HubConnection;
   private _connectionPromise: Promise<void>;
@@ -19,6 +20,7 @@ export class DataService {
       .build();
     this._hubConnection.onclose(error => this.onConnectionLost(error));
     this._hubConnection.on("UpdateDashboard", data => { this.newUserDataAvailable$.emit(data); });
+    this._hubConnection.on("ToggleDashboardMode", () => this.toggleDashboardMode$.emit());
     this.connect();
   }
 

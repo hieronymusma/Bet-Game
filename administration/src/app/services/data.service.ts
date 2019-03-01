@@ -82,4 +82,10 @@ export class DataService {
     await this.connectionPromise();
     return this._hubConnection.invoke("BookTransaction", transaction);
   }
+
+  public async toggleDashboardMode(): Promise<void> {
+    console.log("Call toggle dashboard mode");
+    await this.connectionPromise();
+    await this._hubConnection.invoke("ToggleDashboardMode");
+  }
 }
