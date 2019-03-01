@@ -12,7 +12,6 @@ import { ChartData } from "../chart-data";
 export class StatisticsComponent implements OnInit {
 
   public countData: Array<ChartData> = [];
-  public moneyData: Array<ChartData> = [];
   public bestData: Array<Transaction> = [];
 
   // options
@@ -38,7 +37,6 @@ export class StatisticsComponent implements OnInit {
 
   private calcData(transactions: Array<Transaction>) {
     this.countData = this.betCount.GetCountData(transactions);
-    this.moneyData = this.betCount.GetMoneyData(transactions);
     this.bestData = this.betCount.GetBestMoney(transactions);
   }
 }

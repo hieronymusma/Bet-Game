@@ -16,7 +16,10 @@
                 <td>{{user.user.firstName}}</td>
                 <td>{{user.user.lastName}}</td>
                 <td>{{user.user.saldo}}</td>
-                <td>{{user.hasTransaction}}</td>
+                <td class="text-center">
+                    <i *ngIf="!user.hasTransaction" class="fas fa-hourglass"></i>
+                    <i *ngIf="user.hasTransaction" class="fas fa-check"></i>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -38,7 +41,10 @@
                 <td>{{user.user.firstName}}</td>
                 <td>{{user.user.lastName}}</td>
                 <td>{{user.user.saldo}}</td>
-                <td>{{user.hasTransaction}}</td>
+                <td class="text-center">
+                  <i *ngIf="!user.hasTransaction" class="fas fa-hourglass"></i>
+                  <i *ngIf="user.hasTransaction" class="fas fa-check"></i>
+                </td>
               </tr>
             </tbody>
           </table>

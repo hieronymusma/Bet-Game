@@ -17,23 +17,6 @@ export class ChartService {
     ];
   }
 
-  public GetMoneyData(transactions: Array<Transaction>): Array<ChartData> {
-    const blueMoney = transactions
-    .filter(x => x.betTarget === BetTarget.Blue)
-    .map(x => x.betMoney)
-    .reduce((accumulator, current) => accumulator + current);
-
-    const redMoney = transactions
-    .filter(x => x.betTarget === BetTarget.Red)
-    .map(x => x.betMoney)
-    .reduce((accumulator, current) => accumulator + current);
-
-    return [
-      { name: "Blau", value: blueMoney },
-      { name: "Rot", value: redMoney }
-    ];
-  }
-
   public GetBestMoney(transactions: Array<Transaction>): Array<Transaction> {
     const sorted = transactions.sort((a, b) => b.betMoney - a.betMoney);
     const best = sorted.slice(0, 3);
