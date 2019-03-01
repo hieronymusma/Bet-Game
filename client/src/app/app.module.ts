@@ -14,12 +14,13 @@ import { AppErrorHandler } from "./error-handler";
 import { LineWrapPipe } from "./pipes/line-wrap.pipe";
 import { WaitComponent } from "./components/wait/wait.component";
 import { TransactionGuard } from "./auth/transaction.guard";
-import { NgbModule, NgbModalModule } from "@ng-bootstrap/ng-bootstrap";
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+import { LoginGuard } from "./auth/login.guard";
 
 const appRoutes: Routes = [
   { path: "", pathMatch: "full", redirectTo: "/bet" },
   { path: "bet", component: BetComponent, canActivate: [AuthGuard, TransactionGuard] },
-  { path: "login", component: LoginComponent },
+  { path: "login", component: LoginComponent, canActivate: [LoginGuard] },
   { path: "wait", component: WaitComponent, canActivate: [AuthGuard] }
 ];
 
