@@ -5,12 +5,14 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { AppComponent } from "./app.component";
 import { SetMoneyComponent } from "./set-money/set-money.component";
 import { UserSelectorComponent } from "./user-selector/user-selector.component";
+import { CreateUserComponent } from "./create-user/create-user.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     SetMoneyComponent,
-    UserSelectorComponent
+    UserSelectorComponent,
+    CreateUserComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +24,8 @@ import { UserSelectorComponent } from "./user-selector/user-selector.component";
     AppComponent
   ],
   entryComponents: [
-    SetMoneyComponent
+    SetMoneyComponent,
+    CreateUserComponent
   ]
 })
 export class AppModule { }

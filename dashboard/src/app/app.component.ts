@@ -9,7 +9,7 @@ import { UserStatus } from "./server-interfaces/user-status";
 })
 export class AppComponent {
 
-  public userData: Array<UserStatus>;
+  public userData: Array<UserStatus> = [];
 
   constructor(private dataService: DataService) {
     this.dataService.newUserDataAvailable$.subscribe((data: Array<UserStatus>) => this.userData = data);

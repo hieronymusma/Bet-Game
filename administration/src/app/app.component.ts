@@ -4,6 +4,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { BetTarget } from "./bet-target";
 import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { SetMoneyComponent } from "./set-money/set-money.component";
+import { CreateUserComponent } from "./create-user/create-user.component";
 
 @Component({
   selector: "app-root",
@@ -38,6 +39,10 @@ export class AppComponent {
   }
 
   public setMoney() {
-    const modalRef = this.modalService.open(SetMoneyComponent);
+    this.modalService.open(SetMoneyComponent);
+  }
+
+  public createUser() {
+    this.modalService.open(CreateUserComponent);
   }
 }

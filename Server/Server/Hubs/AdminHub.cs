@@ -22,6 +22,7 @@ namespace Server.Hubs
         public void RecreateDatabase()
         {
             mDataService.RecreateDatabase();
+            mRefreshService.UpdateUserDashboard();
         }
 
         public void BookTransactions(BetTarget target)
@@ -45,7 +46,20 @@ namespace Server.Hubs
         public void ChangeMoney(User user, int money)
         {
             mDataService.ChangeMoney(user, money);
+            mRefreshService.UpdateUserDashboard();
             mBetHubContext.Clients.All.SendAsync("UpdatedMoney").Wait();
+        }
+
+        public string CreateUserAndReturnGuid(string firstname, string lastname)
+        {
+            if (string.IsNullOrWhiteSpace(firstname)) throw new ArgumentNullException(nameof(firstname));
+            if (string.IsNullOrWhiteSpace(lastname)) throw new ArgumentNullException(nameof(lastname));
+
+            var guid = mDataService.CreateUserAndReturnGuid(firstname, lastname);
+
+            mRefreshService.UpdateUserDashboard();
+
+            return guid;
         }
     }
 }

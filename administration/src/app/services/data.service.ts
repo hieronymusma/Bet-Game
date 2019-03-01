@@ -59,4 +59,10 @@ export class DataService {
     await this._connectionPromise;
     return this._hubConnection.invoke("ChangeMoney", user, money);
   }
+
+  public async createUserAndReturnGuid(firstName: string, lastName: string): Promise<string> {
+    console.log("Call CreateUserAndReturnGuid with:", firstName, lastName);
+    await this._connectionPromise;
+    return this._hubConnection.invoke<string>("CreateUserAndReturnGuid", firstName, lastName);
+  }
 }
