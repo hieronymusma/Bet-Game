@@ -1,6 +1,7 @@
 import { Injectable, EventEmitter } from "@angular/core";
-import { HubConnectionBuilder, LogLevel, HubConnection } from "@aspnet/signalr";
+import { HubConnectionBuilder, LogLevel, HubConnection, HubConnectionState } from "@aspnet/signalr";
 import { UserStatus } from "../server-interfaces/user-status";
+import { Transaction } from "../server-interfaces/transaction";
 
 @Injectable({
   providedIn: "root"
@@ -8,10 +9,21 @@ import { UserStatus } from "../server-interfaces/user-status";
 export class DataService {
 
   public newUserDataAvailable$ = new EventEmitter<Array<UserStatus>>();
+  public newChartDataAvailable$ = new EventEmitter<Array<Transaction>>();
   public toggleDashboardMode$ = new EventEmitter();
 
   private _hubConnection: HubConnection;
   private _connectionPromise: Promise<void>;
+
+  private async connectionPromise(): Promise<void> {
+    try {
+      return await this._connectionPromise;
+    } catch (error) {
+      if (this._hubConnection.state === HubConnectionState.Disconnected) {
+        await this.connect();
+      }
+    }
+  }
 
   constructor() {
     this._hubConnection = new HubConnectionBuilder()
@@ -19,14 +31,17 @@ export class DataService {
       .configureLogging(LogLevel.Information)
       .build();
     this._hubConnection.onclose(error => this.onConnectionLost(error));
-    this._hubConnection.on("UpdateDashboard", data => { this.newUserDataAvailable$.emit(data); });
+    this._hubConnection.on("UpdateDashboard", (data, transactions) => {
+      this.newUserDataAvailable$.emit(data);
+      this.newChartDataAvailable$.emit(transactions);
+    });
     this._hubConnection.on("ToggleDashboardMode", () => this.toggleDashboardMode$.emit());
     this.connect();
   }
 
-  private connect(): void {
+  private connect(): Promise<void> {
     console.log("Connect to hub");
-    this._connectionPromise = this._hubConnection.start();
+    return this._connectionPromise = this._hubConnection.start();
   }
 
   private onConnectionLost(error: Error): void {
@@ -36,8 +51,14 @@ export class DataService {
 
   public async getAllUser(): Promise<void> {
     console.log("Call GetAllUser");
-    await this._connectionPromise;
+    await this.connectionPromise();
     const data = await this._hubConnection.invoke<Array<UserStatus>>("GetAllUser");
     this.newUserDataAvailable$.emit(data);
+  }
+
+  public async getAllTransactions(): Promise<Array<Transaction>> {
+    console.log("Call GetAllTransactions");
+    await this.connectionPromise();
+    return this._hubConnection.invoke("GetAllTransactions");
   }
 }

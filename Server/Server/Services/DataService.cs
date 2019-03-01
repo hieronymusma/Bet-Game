@@ -108,5 +108,12 @@ namespace Server.Services
             contextUser.Saldo = money;
             mContext.SaveChanges();
         }
+
+        public IEnumerable<Transaction> GetAllTransactions()
+        {
+            var transactions = mContext.Transactions.ToList();
+            transactions.ForEach(t => t.User = mContext.Accounts.Find(t.UserId));
+            return transactions;
+        }
     }
 }

@@ -1,3 +1,52 @@
-<p>
-  statistics works!
-</p>
+<div class="row" style="padding-top: 50px;">
+  <div class="col-sm-12">
+      <ngx-charts-bar-vertical
+      [scheme]="colorScheme"
+      [results]="countData"
+      [gradient]="gradient"
+      [xAxis]="showXAxis"
+      [yAxis]="showYAxis"
+      [legend]="showLegend"
+      showXAxisLabel="true"
+      showYAxisLabel="true"
+      xAxisLabel="Spieler"
+      yAxisLabel="Anzahl">
+    </ngx-charts-bar-vertical>
+  </div>
+  <!-- <div class="col-sm-6">
+      <ngx-charts-bar-vertical
+      [scheme]="colorScheme"
+      [results]="moneyData"
+      [gradient]="gradient"
+      [xAxis]="showXAxis"
+      [yAxis]="showYAxis"
+      [legend]="showLegend"
+      showXAxisLabel="true"
+      showYAxisLabel="true"
+      xAxisLabel="Spieler"
+      yAxisLabel="Gesetztes Geld">
+    </ngx-charts-bar-vertical>
+  </div> -->
+</div>
+<div class="row">
+  <div class="col-sm-12">
+      <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Vorname</th>
+              <th scope="col">Nachname</th>
+              <th scope="col">Gesetzes Geld</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of bestData; let i = index" class="custom-height">
+              <th scope="row">{{ i + 1}}</th>
+              <td>{{user.user.firstName}}</td>
+              <td>{{user.user.lastName}}</td>
+              <td>{{user.betMoney}}</td>
+            </tr>
+          </tbody>
+        </table>
+  </div>
+</div>

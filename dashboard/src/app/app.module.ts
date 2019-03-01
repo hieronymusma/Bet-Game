@@ -5,6 +5,8 @@ import { AppComponent } from "./app.component";
 import { SortPipe } from "./sort.pipe";
 import { StatisticsComponent } from "./statistics/statistics.component";
 import { TableComponent } from "./table/table.component";
+import { NgxChartsModule } from "@swimlane/ngx-charts";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -14,7 +16,9 @@ import { TableComponent } from "./table/table.component";
     TableComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    BrowserAnimationsModule,
+    NgxChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

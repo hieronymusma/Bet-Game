@@ -22,6 +22,8 @@ namespace Server.Services
 
         IEnumerable<User> GetAllUsers();
 
+        IEnumerable<Transaction> GetAllTransactions();
+
         void BookTransactions(BetTarget target);
 
         void DeleteTransactions();

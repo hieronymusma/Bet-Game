@@ -19,5 +19,10 @@ namespace Server.Hubs
         {
             return mDataService.GetUserStatus();
         }
+
+        public IEnumerable<Transaction> GetAllTransactions()
+        {
+            return mDataService.GetAllTransactions();
+        }
     }
 }

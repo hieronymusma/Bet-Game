@@ -21,7 +21,8 @@ namespace Server.Services
         public void UpdateUserDashboard()
         {
             var data = mDataService.GetUserStatus();
-            mHubContext.Clients.All.SendAsync("UpdateDashboard", data);
+            var transactions = mDataService.GetAllTransactions();
+            mHubContext.Clients.All.SendAsync("UpdateDashboard", data, transactions);
         }
     }
 }
