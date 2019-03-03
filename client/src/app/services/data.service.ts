@@ -16,7 +16,7 @@ export class DataService {
 
   private async connectionPromise(): Promise<void> {
     try {
-      return await this.connectionPromise();
+      return await this._connectionPromise;
     } catch (error) {
       if (this._hubConnection.state === HubConnectionState.Disconnected) {
         await this.connect();

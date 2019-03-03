@@ -33,7 +33,7 @@ export class UserSelectorComponent implements OnInit {
   public itemWasSelected(item: NgbTypeaheadSelectItemEvent) {
     const string: string = item.item;
     const split = string.split(" ");
-    this.selectedUser = this.users.find(x => x.firstName === split[0] && x.lastName === split[1]);
+    this.selectedUser = this.users.find(x => x.guid === split[split.length - 1]);
   }
 
   search = (text$: Observable<string>) =>
@@ -43,6 +43,6 @@ export class UserSelectorComponent implements OnInit {
     map(term =>
       this.users.filter(v => v.firstName.toLowerCase().indexOf(term.toLowerCase()) > -1
       || v.lastName.toLowerCase().indexOf(term.toLowerCase()) > -1)
-      .map(x => x.firstName + " " + x.lastName)
+      .map(x => x.firstName + " " + x.lastName + " " + x.guid)
       .slice(0, 10)))
 }
