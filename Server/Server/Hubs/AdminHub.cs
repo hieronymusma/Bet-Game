@@ -34,7 +34,7 @@ namespace Server.Hubs
         {
             mDataService.BookTransactions(target);
             mRefreshService.UpdateUserDashboard();
-            mBetHubContext.Clients.All.SendAsync("WaitingFinished").Wait();
+            mBetHubContext.Clients.All.SendAsync("WaitingFinished");
         }
 
         public void DeleteTransactions()
@@ -52,7 +52,7 @@ namespace Server.Hubs
         {
             mDataService.ChangeMoney(user, money);
             mRefreshService.UpdateUserDashboard();
-            mBetHubContext.Clients.All.SendAsync("UpdatedMoney").Wait();
+            mBetHubContext.Clients.All.SendAsync("UpdatedMoney");
         }
 
         public string CreateUserAndReturnGuid(string firstname, string lastname)
