@@ -11,7 +11,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let user of userData | sort | slice:0:20; let i = index" class="custom-height">
+              <tr *ngFor="let user of userData | sort | slice:0:15; let i = index" class="custom-height">
                 <th scope="row">{{ i + 1}}</th>
                 <td>{{user.user.firstName}}</td>
                 <td>{{user.user.lastName}}</td>
@@ -36,8 +36,8 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let user of userData | sort | slice:20; let i = index" class="custom-height">
-                <th scope="row">{{ i + 21}}</th>
+              <tr *ngFor="let user of userData | sort | slice:15; let i = index" class="custom-height">
+                <th scope="row">{{ i + 16}}</th>
                 <td>{{user.user.firstName}}</td>
                 <td>{{user.user.lastName}}</td>
                 <td>{{user.user.saldo}}</td>
