@@ -20,7 +20,7 @@ namespace Server.Services
         }
 
         public void BookTransaction(Transaction transaction)
-        {            
+        {
             if (mContext.Accounts.Where(a => a.GUID == transaction.User.GUID).Count() == 0)
             {
                 throw new InvalidOperationException($"User with GUID {transaction.User.GUID} not found");
@@ -37,6 +37,9 @@ namespace Server.Services
                 throw new InvalidOperationException($"User {user.FirstName} {user.LastName} already has an pending transaction");
             }
 
+            var entity = mContext.Find<User>(transaction.User.UserId);
+
+            transaction.User = entity;
             mContext.Transactions.Add(transaction);
             mContext.SaveChanges();
         }
@@ -71,7 +74,7 @@ namespace Server.Services
         public IEnumerable<UserStatus> GetUserStatus()
         {
             var userStatusList = new List<UserStatus>();
-            foreach(var user in mContext.Accounts)
+            foreach (var user in mContext.Accounts)
             {
                 var hasTransaction = mContext.Transactions.Where(t => t.UserId == user.UserId).Count() > 0;
                 var userStatus = new UserStatus { User = user, HasTransaction = hasTransaction };
@@ -82,7 +85,7 @@ namespace Server.Services
 
         public void BookTransactions(BetTarget target)
         {
-            foreach(var transaction in mContext.Transactions)
+            foreach (var transaction in mContext.Transactions)
             {
                 var newMoney = transaction.BetTarget == target ? transaction.BetMoney : -transaction.BetMoney;
                 var user = mContext.Accounts.Single(u => u.UserId == transaction.UserId);

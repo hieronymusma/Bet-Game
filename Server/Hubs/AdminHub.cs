@@ -70,10 +70,9 @@ namespace Server.Hubs
             {
                 mDataService.BookTransaction(transaction);
             }
-            catch (InvalidOperationException)
+            catch (InvalidOperationException ex)
             {
-                return false;
-                throw;
+                throw ex;
             }
 
             mRefreshService.UpdateUserDashboard();

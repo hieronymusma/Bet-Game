@@ -14,6 +14,7 @@ namespace Server.DataStorage
         public int TransactionId { get; set; }
 
         public int UserId { get; set; }
+
         public User User { get; set; }
 
         public int BetMoney { get; set; }
