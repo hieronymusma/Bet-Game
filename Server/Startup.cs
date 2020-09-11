@@ -1,10 +1,8 @@
-﻿using System;
-using System.Net;
-using System.Net.Sockets;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Server.DataStorage;
 using Server.Hubs;
 using Server.Services;
@@ -19,7 +17,8 @@ namespace Server
         {
             services.AddDbContext<DatabaseContext>(options =>
             {
-                options.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Database=BetGame;Trusted_Connection=True;MultipleActiveResultSets=true");
+                options.UseSqlite("Filename=data.db");
+                // options.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Database=BetGame;Trusted_Connection=True;MultipleActiveResultSets=true");
             });
 
             services.AddCors(options => options.AddPolicy("CorsPolicy", builder =>
@@ -42,7 +41,7 @@ namespace Server
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -51,11 +50,12 @@ namespace Server
 
             app.UseCors("CorsPolicy");
 
-            app.UseSignalR(routes =>
-            {
-                routes.MapHub<BetHub>("/BetHub");
-                routes.MapHub<AdminHub>("/AdminHub");
-                routes.MapHub<DashboardHub>("/DashboardHub");
+            app.UseRouting();
+
+            app.UseEndpoints(option => {
+                option.MapHub<BetHub>("/BetHub");
+                option.MapHub<AdminHub>("/AdminHub");
+                option.MapHub<DashboardHub>("/DashboardHub");
             });
 
             EnsureDatabaseCreated(app);
